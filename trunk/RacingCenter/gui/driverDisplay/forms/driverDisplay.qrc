@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/">
+    <file>images/Fuel.svg</file>
+    <file>images/Throttle.svg</file>
+    <file>images/Needle.svg</file>
+  </qresource>
+</RCC>

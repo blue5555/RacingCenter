@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/default" >
+        <file>images/train_digits.svg</file>
+        <file>images/dial1.svg</file>
+        <file>images/dial2.svg</file>
+        <file>images/dial3.svg</file>
+        <file>images/dial4.svg</file>
+        <file>images/block.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="40.0922mm" height="23.8281mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 30.6291 18.2039"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:black}
+    .fil2 {fill:url(#id0);fill-rule:nonzero}
+    .fil3 {fill:url(#id1);fill-rule:nonzero}
+    .fil0 {fill:url(#id2);fill-rule:nonzero}
+   ]]>
+  </style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="15.1254" y1="4.6401" x2="15.1254" y2="14.2334">
+   <stop offset="0" style="stop-color:#191919"/>
+   <stop offset="1" style="stop-color:#686868"/>
+  </linearGradient>
+  <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="15.1254" y1="5.23966" x2="15.1254" y2="13.6338">
+   <stop offset="0" style="stop-color:#F4F4F4"/>
+   <stop offset="1" style="stop-color:#262626"/>
+  </linearGradient>
+  <linearGradient id="id2" gradientUnits="userSpaceOnUse" x1="11.9235" y1="19.218" x2="4.85806" y2="6.98074">
+   <stop offset="0" style="stop-color:#750000"/>
+   <stop offset="1" style="stop-color:#F60000"/>
+  </linearGradient>
+ </defs>
+ <g id="Ebene_x0020_3">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="g3864" inkscape:label="#g9248">
+   <polygon id="path3866" class="fil0" points="0.128728,18.2039 -0,17.9809 16.0548,7.99483 16.7817,9.2537 " sodipodi:nodetypes="ccccc"/>
+   <rect id="rect3868" class="fil1" transform="matrix(-0.5 -0.866025 0.866025 -0.5 14.264 10.7073)" width="1.4536" height="18.8969"/>
+  </g>
+  <g id="g3874">
+   <path id="path3876" class="fil2" d="M19.922 9.43674c7.63967e-005,2.64867 -2.14789,4.79664 -4.79656,4.79664 -2.64875,0 -4.79672,-2.14797 -4.79672,-4.79672 0,-2.6486 2.14797,-4.79656 4.79672,-4.79656 2.64867,0 4.79664,2.14797 4.79664,4.79656l-7.63967e-005 7.63967e-005z" sodipodi:ry="21.031116" sodipodi:rx="21.031116" sodipodi:cy="412.02618" sodipodi:cx="117.90171" sodipodi:type="arc"/>
+   <path id="path3878" class="fil3" d="M19.3225 9.43674c7.63967e-005,2.31757 -1.87943,4.19708 -4.197,4.19708 -2.31765,0 -4.19716,-1.87951 -4.19716,-4.19716 0,-2.31749 1.87951,-4.197 4.19716,-4.197 2.31757,0 4.19708,1.87951 4.19708,4.197l-7.63967e-005 7.63967e-005z" sodipodi:type="arc" sodipodi:cx="117.90171" sodipodi:cy="412.02618" sodipodi:rx="21.031116" sodipodi:ry="21.031116"/>
+  </g>
+ </g>
+</svg>

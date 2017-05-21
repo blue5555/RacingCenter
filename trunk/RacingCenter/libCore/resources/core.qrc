@@ -1,0 +1,10 @@
+<RCC>
+  <qresource prefix="/">
+    <file>sounds/bestlap.wav</file>
+    <file>sounds/finallap.wav</file>
+    <file>sounds/lap.wav</file>
+	<file>sounds/leader.wav</file>
+	<file>sounds/leaderlap.wav</file>
+	<file>sounds/raceover.wav</file>
+  </qresource>
+</RCC>

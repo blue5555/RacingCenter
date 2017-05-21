@@ -1,0 +1,31 @@
+<RCC>
+  <qresource prefix="/">
+    <file>images/Add.png</file>
+    <file>images/application-exit.png</file>
+    <file>images/Button-Green-Small.png</file>
+    <file>images/Button-Red-Small.png</file>
+    <file>images/clear.png</file>
+    <file>images/connect.png</file>
+    <file>images/Delete.png</file>
+    <file>images/disconnect.png</file>
+    <file>images/Edit.png</file>
+    <file>images/Flag.png</file>
+    <file>images/Goblet.png</file>
+    <file>images/Green-Big.png</file>
+    <file>images/LargeIcon.png</file>
+    <file>images/Open.png</file>
+    <file>images/Play.png</file>
+    <file>images/racing-car.ico</file>
+    <file>images/Red-Big.png</file>
+    <file>images/Save.png</file>
+    <file>images/settings.png</file>
+    <file>images/SmallIcon.png</file>
+    <file>images/Stop.png</file>
+    <file>images/Stopwatch.png</file>
+    <file>images/connect.png</file>
+    <file>images/disconnect.png</file>
+    <file>images/application-exit.png</file>
+    <file>images/settings.png</file>
+    <file>images/clear.png</file>
+  </qresource>
+</RCC>
