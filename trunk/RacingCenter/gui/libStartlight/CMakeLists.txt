@@ -28,7 +28,7 @@ set(libheader
 QT5_WRAP_UI (UIS_HDRS 
 			 forms/startLightSimple.ui)
 	
-QT5_ADD_RESOURCES (ResourceSources forms/startLight.qrc)
+QT5_ADD_RESOURCES (ResourceSources forms/startlight.qrc)
 
 QT5_WRAP_CPP(SOURCES_MOC ${libheader})
 
