@@ -10,7 +10,7 @@ add_package_RC(${PROJNAME} libDataCore)
 find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
 
 include_directories(
-    ./include
+    ./include/libStartlight
 	${${PROJNAME}_INCLUDE_DIRS}
 	${CMAKE_CURRENT_BINARY_DIR}
     )
