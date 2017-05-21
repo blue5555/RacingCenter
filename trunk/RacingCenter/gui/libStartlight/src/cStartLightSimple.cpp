@@ -1,5 +1,5 @@
 #include "libStartlight/cStartLightSimple.h"
-#include <ui_StartLightSimple.h>
+#include <ui_startLightSimple.h>
 #include <libConfig/cConfig.h>
 
 cStartLight::cStartLight(QWidget *parent) :
