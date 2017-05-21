@@ -19,6 +19,8 @@ class cSQLConnector : public cThing
 	QSqlDatabase m_oDatabase;
 	QSqlQuery	 m_oQuery;
 
+	tBool InitDatabase();
+
 public:
     cSQLConnector();
     ~cSQLConnector();

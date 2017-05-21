@@ -44,7 +44,9 @@ tBool cXMLDatabase::ReadDatabase(cDatabase* i_opDatabase, const std::string& i_o
 
     if(!oFile.open(QIODevice::ReadOnly)) 
     {
-		DEBUGMSG("Can't open config file");
+		DEBUGMSG("Can't open database file.");
+		DEBUGMSG("Create new database file.");
+		SaveDatabase(i_opDatabase, i_oFilePath);
 		return false;
 	} 
 	else if( !m_oDomDocument.setContent(&oFile)) 

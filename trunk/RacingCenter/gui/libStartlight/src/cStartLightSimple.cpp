@@ -1,4 +1,4 @@
-#include "cStartLightSimple.h"
+#include "libStartlight/cStartLightSimple.h"
 #include <ui_StartLightSimple.h>
 #include <libConfig/cConfig.h>
 

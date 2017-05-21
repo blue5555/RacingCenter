@@ -75,7 +75,9 @@ tBool cXMLConfig::ReadConfig(cConfig* i_opConfig, const std::string& i_strFileNa
 
     if(!oFile.open(QIODevice::ReadOnly)) 
     {
-		DEBUGMSG("Can't open config file");
+		DEBUGMSG("Can't open config file.");
+		DEBUGMSG("Create new config file:" << i_strFileName.c_str());
+		SaveConfig(i_opConfig, i_strFileName);
         return false;
     } 
     else if( !m_oDomDocument.setContent(&oFile)) 
