@@ -44,7 +44,7 @@ tBool cSQLConnector::InitDatabase()
 		qDebug() << m_oQuery.lastError().text();
 	}
 
-	if(m_oQuery.exec("CREATE TABLE IF NOT EXISTS 'Cars';"))
+	if(m_oQuery.prepare("CREATE TABLE IF NOT EXISTS CARS(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL);"))
 	{
 
 	}

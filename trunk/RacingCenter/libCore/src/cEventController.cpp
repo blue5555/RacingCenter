@@ -1,5 +1,5 @@
 #include "libCore/cEventController.h"
-#include <QGlobal.h>
+//#include <QGlobal.h>
 #include <QTime>
 
 using namespace RacingCenter;
