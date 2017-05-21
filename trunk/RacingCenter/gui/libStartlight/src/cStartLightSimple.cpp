@@ -8,7 +8,7 @@ cStartLight::cStartLight(QWidget *parent) :
 ,m_nCurrentState(0)
 ,m_opLabel(NULL)
 {
-	Q_INIT_RESOURCE(startLight);
+	Q_INIT_RESOURCE(startlight);
 
 	m_opStartLight->setupUi(this);
 
