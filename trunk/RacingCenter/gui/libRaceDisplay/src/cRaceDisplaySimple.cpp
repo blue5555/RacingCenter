@@ -342,7 +342,7 @@ void cRaceDisplaySimple::resizeEvent(QResizeEvent *event)
 	}
 
 	tInt8 nCounter = 0;
-	map<tUInt8,vector<cLabel*>>::iterator itDriver = m_oLabels.begin();
+	map<tUInt8,vector<cLabel*> >::iterator itDriver = m_oLabels.begin();
 	for(; itDriver != m_oLabels.end(); itDriver++) 
 	{
 		vector<cLabel*> oLabels = m_oLabels[itDriver->first];
