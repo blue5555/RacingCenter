@@ -7,6 +7,8 @@
 struct cDatabaseDriver : public cDatabaseBaseElement
 {
 
+	tBool Init();
+
 protected:
 	tUInt		m_nPoints;
 	tUInt		m_nDrivingRaces;
@@ -17,6 +19,9 @@ protected:
 public:
     cDatabaseDriver(const std::string& i_strName);
     ~cDatabaseDriver();
+
+	tBool		Set(const QStringList& i_oValues);
+	QStringList GetColumnValues() const;
 
     tUInt GetPoints() const { return m_nPoints; }
     void  SetPoints(tUInt16 val) { m_nPoints = val; }

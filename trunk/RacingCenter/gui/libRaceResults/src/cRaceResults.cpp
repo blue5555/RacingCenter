@@ -155,20 +155,6 @@ void cRaceResults::closeEvent (QCloseEvent *event)
 		if (reply == QMessageBox::Yes) 
 		{
 			cDatabase* opDatabase = cDatabase::instance();
-			tDriverMap oDrivers = m_opRace->GetDriverMap();
-
-			opDatabase->AddRace(m_opDataLogger->CreateDatabaseRace());
-
-			for (tDriverMap::iterator itDriver = oDrivers.begin(); itDriver != oDrivers.end(); itDriver++)
-			{
-				cDatabaseDriver* opDatabaseDriver = opDatabase->GetDriver(itDriver->second.GetName());
-				if (opDatabaseDriver != NULL)
-				{
-					opDatabaseDriver->SetPoints(itDriver->second.GetPoints());
-				}
-			}
-
-			opDatabase->SaveDatabase();
 		} 
 		else 
 		{

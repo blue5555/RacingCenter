@@ -9,7 +9,7 @@
 using namespace RacingCenter;
 
 cCar::cCar(const std::string& i_strName) : 
- cDatabaseCar(*cDatabase::instance()->GetCar(i_strName))
+ cDatabaseCar(cDatabase::instance()->GetCar(i_strName))
 ,m_nLastFuelTimeStamp(0)
 ,m_nLastSendFlashLight(0)
 ,m_opConfig(cConfig::instance())

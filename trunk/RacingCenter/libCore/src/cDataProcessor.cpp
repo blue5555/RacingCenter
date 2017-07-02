@@ -271,7 +271,7 @@ void cDataProcessor::ProcessData()
 					cDriver* opDriver = m_oRace.GetDriver(n);
 					if(opDriver != NULL)
 					{
-						m_oDataLogger.AddMessage(opDriver->CreateDisplayMessage(oCUData.nTimeStamp));
+						m_oDataLogger.AddDriverMessage(opDriver->CreateDisplayMessage(oCUData.nTimeStamp));
 					}
 				}
 
@@ -287,6 +287,13 @@ void cDataProcessor::ProcessData()
 						m_oLightControl.StopLightWave();
 						m_oLightControl.StartLightWave( m_oRace.GetBestTime() );
 					}
+
+					{
+						sDriverMessage oDriverMessage;
+						m_oRace.CreateDriverMessage(oCUData.oCUDriver.m_iID, oCUData.nTimeStamp, oDriverMessage);
+						m_oDataLogger.AddRoundFinish( oDriverMessage );
+					}
+
 					break;
 				case DT_CONTROLLER:
 					CheckForChoas(oCUData);

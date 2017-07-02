@@ -6,6 +6,7 @@
 
 class cDatabaseCar : public cDatabaseBaseElement
 {
+	tBool Init();
 
 protected:
 	tFloat64  	m_f64TankCapacity;
@@ -22,6 +23,9 @@ protected:
 public:
 	cDatabaseCar(const std::string& i_strName);
     ~cDatabaseCar();
+
+	tBool		Set(const QStringList& i_oValues);
+	QStringList GetColumnValues() const;
 
     tFloat64 GetConsumption(tUInt8 i_nIndex) const;
     void     SetConsumption(tUInt8 i_nIndex, tFloat64 i_f64Value);

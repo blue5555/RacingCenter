@@ -11,8 +11,6 @@ cDatabase* cDatabase::m_opDatabase = NULL;
 
 void cDatabase::Init()
 {
-	m_oCars.clear();
-	m_oDrivers.clear();
 }
 
 tBool cDatabase::LoadDatabase(const std::string& i_oConfigPath)
@@ -26,11 +24,7 @@ tBool cDatabase::LoadDatabase(const std::string& i_oConfigPath)
         m_strDefaultPath = i_oConfigPath;
     }
 
-	m_oSQLConnector.LoadDatabase(m_strDefaultPath + SQLDATABASENAME);
-		
-	cXMLDatabase oXMLDatabase;
-	oXMLDatabase.ReadDatabase(this, m_strDefaultPath + DATABASENAME);
-
+	m_oSQLConnector.LoadDatabase(m_strDefaultPath + SQLDATABASENAME);		
 	return true;
 }
 
@@ -44,55 +38,50 @@ tBool cDatabase::SaveDatabase(const std::string& i_oConfigPath)
     {
         m_strDefaultPath = i_oConfigPath;
     }
-    cXMLDatabase oXMLDatabase;
-    oXMLDatabase.SaveDatabase(this, m_strDefaultPath + DATABASENAME);
-
     return true;
 }
 
 tUInt cDatabase::GetNumberOfCars()
 {
-	return m_oCars.size();
+	return m_oSQLConnector.GetNumberOfEntries("Cars");
 }
 
 tUInt cDatabase::GetNumberOfDrivers()
 {
-	return m_oDrivers.size();
+	return m_oSQLConnector.GetNumberOfEntries("Drivers");
 }
 
-const tDatabaseDrivers cDatabase::GetAllDrivers() const
+std::list<cDatabaseDriver> cDatabase::GetAllDrivers()
 {
-    return m_oDrivers;
+    return m_oSQLConnector.GetAllDrivers();
 }
 
-const tDatabaseCars cDatabase::GetAllCars() const
+std::list<cDatabaseCar> cDatabase::GetAllCars()
 {
-    return m_oCars;
+    return m_oSQLConnector.GetAllCars();
 }
 
-std::list<std::string> cDatabase::GetAllDriverNames() const
+std::list<std::string> cDatabase::GetAllDriverNames()
 {
     std::list<std::string> oDriverNames;
-    for (tDatabaseDrivers::const_iterator itDriver = m_oDrivers.begin(); itDriver != m_oDrivers.end(); itDriver++)
+	std::list<cDatabaseDriver> oDrivers = GetAllDrivers();
+    for (std::list<cDatabaseDriver>::iterator itDriver = oDrivers.begin(); itDriver != oDrivers.end(); itDriver++)
     {
         oDriverNames.push_back(itDriver->GetName());
     }
-
     oDriverNames.sort();
-
     return oDriverNames;
 }
 
-std::list<std::string> cDatabase::GetAllCarNames() const
+std::list<std::string> cDatabase::GetAllCarNames()
 {
     std::list<std::string> oCarNames;
-    for (tDatabaseCars::const_iterator itCar = m_oCars.begin(); itCar != m_oCars.end(); itCar++)
+	std::list<cDatabaseCar> oCars = GetAllCars();
+    for (std::list<cDatabaseCar>::iterator itCar = oCars.begin(); itCar != oCars.end(); itCar++)
     {
         oCarNames.push_back(itCar->GetName());
     }
-
     oCarNames.sort();
-
     return oCarNames;
 }
 
@@ -101,127 +90,59 @@ tBool cDatabase::AddRace(const cDatabaseRace& i_oRace)
 	return true;
 }
 
-
 tBool cDatabase::AddDriver(const std::string& i_strName)
 {
-	if(GetDriver(i_strName) == NULL) 
+	if(!EntityExists("Drivers", i_strName))
     {
-		cDatabaseDriver oDatabaseDriver(i_strName);
-		m_oDrivers.push_back(oDatabaseDriver);
+		m_oSQLConnector.AddDriver(i_strName);
 		return true;
 	} else {
 		return false;
 	}
 }
 
-tBool cDatabase::AddDriver(const cDatabaseDriver& i_oDriver)
+cDatabaseDriver cDatabase::GetDriver(const std::string& i_strName)
 {
-    if(GetDriver(i_oDriver.GetName()) == NULL) 
-    {
-        m_oDrivers.push_back(i_oDriver);
-        return true;
-    } else {
-        return false;
-    }
+	cDatabaseDriver oDatabaseDriver("");
+	m_oSQLConnector.GetDriver(i_strName, oDatabaseDriver);
+	return oDatabaseDriver;
 }
 
-cDatabaseDriver* cDatabase::GetDriver(const std::string& i_strName)
+tBool cDatabase::EntityExists(const std::string& i_strEntity, const std::string& i_strName)
 {
-    /*   if(m_oDrivers.find(i_strName) != m_oDrivers.end())
-    {
-    return &m_oDrivers.at(i_strName);
-    }*/
+	return m_oSQLConnector.EntityExists(i_strEntity, i_strName);
+}
 
-    for (tDatabaseDrivers::iterator it = m_oDrivers.begin(); it != m_oDrivers.end(); it++)
-    {
-        if(i_strName == it->GetName())
-        {
-            return &(*it);
-        }
-    }
-
-    return NULL;
+tBool cDatabase::UpdateDriver(const cDatabaseDriver& i_oDriver)
+{
+	return m_oSQLConnector.UpdateDriver(i_oDriver);
 }
 
 tBool cDatabase::DeleteDriver(const std::string& i_strName)
 {
-    //if(m_oDrivers.find(i_strName) != m_oDrivers.end())
-    //{
-    //    m_oDrivers.erase(m_oDrivers.find(i_strName));
-    //    return true;
-    //}
-
-    for (tDatabaseDrivers::iterator it = m_oDrivers.begin(); it != m_oDrivers.end(); it++)
-    {
-        if(i_strName == it->GetName())
-        {
-            m_oDrivers.erase(it);
-            return true;
-        }
-    }
-
-	return false;
+	return m_oSQLConnector.DeleteDriver(i_strName);
 }
 
 tBool cDatabase::AddCar(const std::string& i_strName)
 {
-	if(GetCar(i_strName) == NULL) 
-    {
-		cDatabaseCar oDatabaseCar(i_strName);
-		m_oCars.push_back(oDatabaseCar);
-		return true;
-	} else {
-		return false;
-	}
+	return m_oSQLConnector.AddCar(i_strName);
 }
 
-tBool cDatabase::AddCar(const cDatabaseCar& i_oCar)
+cDatabaseCar cDatabase::GetCar(const std::string& i_strName)
 {
-    if(GetDriver(i_oCar.GetName()) == NULL) 
-    {
-        m_oCars.push_back(i_oCar);
-        return true;
-    } else {
-        return false;
-    }
+	cDatabaseCar oDatabaseCar("");
+	m_oSQLConnector.GetCar(i_strName,oDatabaseCar);
+	return oDatabaseCar;
 }
 
-cDatabaseCar* cDatabase::GetCar(const std::string& i_strName)
+tBool cDatabase::UpdateCar(const cDatabaseCar& i_oCar)
 {
-    //if(m_oCars.find(i_strName) != m_oCars.end())
-    //{
-    //    return &m_oCars.at(i_strName);
-    //}
-
-    for (tDatabaseCars::iterator it = m_oCars.begin(); it != m_oCars.end(); it++)
-    {
-        if(i_strName == it->GetName())
-        {
-            return &(*it);
-        }
-    }
-
-    return NULL;
+	return m_oSQLConnector.UpdateCar(i_oCar);
 }
 
 tBool cDatabase::DeleteCar(const std::string& i_strName)
 {
-    //if(m_oCars.find(i_strName) != m_oCars.end())
-    //{
-    //    m_oCars.erase(m_oCars.find(i_strName));
-    //    return true;
-    //}
-
-    for (tDatabaseCars::iterator it = m_oCars.begin(); it != m_oCars.end(); it++)
-    {
-        if(i_strName == it->GetName())
-        {
-            m_oCars.erase(it);
-            return true;
-        }
-    }
-
-    return false;
+    return m_oSQLConnector.DeleteCar(i_strName);
 }
 
 tBool cDatabase::SaveResults(const cDatabaseRace& i_oDatabaseRace)

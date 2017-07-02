@@ -14,9 +14,6 @@ namespace RacingCenter
 
 class cRace;
 
-typedef std::vector<cDatabaseDriver> tDatabaseDrivers;
-typedef std::vector<cDatabaseCar>    tDatabaseCars;
-
 class cDatabase : public cThing
 {
 
@@ -32,39 +29,36 @@ private:
 	static cDatabase* m_opDatabase;
 
 	cSQLConnector	 m_oSQLConnector;
-
-    tDatabaseCars    m_oCars;
-    tDatabaseDrivers m_oDrivers;
-
     std::string      m_strDefaultPath;
 
 public:
-
 	void  Init();
 
     tBool LoadDatabase(const std::string& i_oConfigPath);
     tBool SaveDatabase(const std::string& i_oConfigPath = "");
 
-	tUInt		GetNumberOfCars();
-	tUInt		GetNumberOfDrivers();
+	tUInt	GetNumberOfCars();
+	tUInt	GetNumberOfDrivers();
 
-	const tDatabaseDrivers GetAllDrivers() const;
-	const tDatabaseCars    GetAllCars() const;
+	tBool	EntityExists(const std::string& i_strEntity, const std::string& i_strName);
+
+	std::list<cDatabaseDriver> GetAllDrivers();
+	std::list<cDatabaseCar>	   GetAllCars();
 
 	tBool		     AddRace(const cDatabaseRace& i_oRace);
 
 	tBool		     AddDriver(const std::string& i_strName);
-    tBool		     AddDriver(const cDatabaseDriver& i_oDriver);
-    cDatabaseDriver* GetDriver(const std::string& i_strName);
+    cDatabaseDriver  GetDriver(const std::string& i_strName);
+	tBool			 UpdateDriver(const cDatabaseDriver& i_oDriver);
 	tBool		     DeleteDriver(const std::string& i_strName);
 
 	tBool			AddCar(const std::string& i_strName);
-	tBool		    AddCar(const cDatabaseCar& i_oCar);
-    cDatabaseCar*	GetCar(const std::string& i_strName);
+    cDatabaseCar 	GetCar(const std::string& i_strName);
+	tBool			UpdateCar(const cDatabaseCar& i_oCar);
 	tBool			DeleteCar(const std::string& i_strName);
 
-    std::list<std::string> GetAllDriverNames() const;
-    std::list<std::string> GetAllCarNames() const;
+    std::list<std::string> GetAllDriverNames();
+    std::list<std::string> GetAllCarNames();
 
 	tBool			SaveResults(const cDatabaseRace& i_oDatabaseRace);
 

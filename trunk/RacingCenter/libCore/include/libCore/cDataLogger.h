@@ -9,8 +9,9 @@ namespace RacingCenter
 
 class cDataLogger
 {
-	const cRace* m_opRace;
-	map<tUInt, vector<sDriverMessage> > m_oDriverMessages;
+	const cRace*			m_opRace;
+	vector<sDriverMessage>	m_oDriverMessages;
+	vector<sDriverMessage>  m_oRoundFinish;
 
 	tBool m_bLogging;
 
@@ -21,7 +22,8 @@ public:
 	void Init(const cRace* i_opRace);
 	void Clear();
 
-	void AddMessage(const sDriverMessage& i_oDriverMessage);
+	void AddRoundFinish(const sDriverMessage& i_oDriverMessage);
+	void AddDriverMessage(const sDriverMessage& i_oDriverMessage);
 
 	cDatabaseRace CreateDatabaseRace();
 

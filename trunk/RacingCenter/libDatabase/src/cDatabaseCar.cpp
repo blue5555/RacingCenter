@@ -44,11 +44,83 @@ cDatabaseCar::cDatabaseCar(const std::string& i_strName) : cDatabaseBaseElement(
     m_n8Brake = 15;
     m_n8Fuel  = 15;
 
+	Init();
+
 };
 
 cDatabaseCar::~cDatabaseCar()
 {
 
+}
+
+tBool cDatabaseCar::Init()
+{
+	AddColumn("Name", "TEXT");
+	AddColumn("Brake", "INTEGER");
+	AddColumn("Fuel", "INTEGER");
+	AddColumn("Speed", "INTEGER");
+	AddColumn("TankCapacity", "REAL");
+	AddColumn("TankSpeed", "REAL");
+
+	for(tUInt n = 0; n < 16; n++)
+	{
+		AddColumn(QString("Speed%1 ").arg(n).toStdString(), "INTEGER");
+	}
+
+	for(tUInt n = 0; n < 16; n++)
+	{
+		AddColumn(QString("Consumption%1 ").arg(n).toStdString(), "INTEGER");
+	}
+
+	return true;
+}
+
+tBool cDatabaseCar::Set(const QStringList& i_oValues)
+{
+	SetName(i_oValues.at(0).toStdString());
+
+	SetBrake(i_oValues.at(1).toInt()); 
+	SetFuel(i_oValues.at(2).toInt());
+	SetSpeed(i_oValues.at(3).toInt());
+
+	SetTankCapacity(i_oValues.at(4).toFloat());
+	SetTankSpeed(i_oValues.at(5).toFloat());
+
+	for (tUInt n = 0; n < 16; n++)
+	{
+		SetSpeed(n, i_oValues.at(6+n).toInt());
+	}
+
+	for (tUInt n = 0; n < 16; n++)
+	{
+		SetConsumption(n, i_oValues.at(n + 6 + 16).toInt());
+	}
+
+	return true;
+}
+
+QStringList cDatabaseCar::GetColumnValues() const
+{
+	QStringList oValues;
+
+	oValues.append(QString("'%1'").arg(GetName().c_str()));
+	oValues.append(QString::number(m_n8Brake));
+	oValues.append(QString::number(m_n8Fuel));
+	oValues.append(QString::number(m_n8Speed));
+	oValues.append(QString::number(m_f64TankCapacity));
+	oValues.append(QString::number(m_f64TankSpeed));
+
+	for(tUInt n = 0; n < 16; n++)
+	{
+		oValues.append(QString::number(m_oSpeed[n]));
+	}
+
+	for(tUInt n = 0; n < 16; n++)
+	{
+		oValues.append(QString::number(m_f64Consumption[n]));
+	}
+
+	return oValues;
 }
 
 tFloat64 cDatabaseCar::GetConsumption(tUInt8 i_nIndex) const

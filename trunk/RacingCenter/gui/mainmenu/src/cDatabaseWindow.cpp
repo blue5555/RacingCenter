@@ -71,28 +71,14 @@ void cDatabaseWindow::DatabaseItemDoubleClicked(QTreeWidgetItem* opTreeWidgetIte
     	if(QSParent == "Cars") 
         {
     		// load car information
-    		cDatabaseCar* opCar = m_opDatabase->GetCar(QSText.toStdString());
-    		if(opCar != NULL) 
-            {
-    			m_opMainWindow->tabWidget_Information->setCurrentIndex(1);
-    			LoadCarInformation(opCar);
-    		} 
-            else 
-            {
-    			qDebug() << "ERROR: Load Car.";
-    		}
+    		cDatabaseCar oCar = m_opDatabase->GetCar(QSText.toStdString());
+   			m_opMainWindow->tabWidget_Information->setCurrentIndex(1);
+   			LoadCarInformation(oCar);
     	} else if(QSParent == "Drivers") {
     		// load driver information
-    		cDatabaseDriver* opDriver = m_opDatabase->GetDriver(QSText.toStdString());
-    		if(opDriver != NULL) 
-            {
-    			m_opMainWindow->tabWidget_Information->setCurrentIndex(0);
-    			LoadDriverInformation(opDriver);
-    		} 
-            else 
-            {
-    			qDebug() << "ERROR: Load Driver.";
-    		}
+    		cDatabaseDriver oDriver = m_opDatabase->GetDriver(QSText.toStdString());
+   			m_opMainWindow->tabWidget_Information->setCurrentIndex(0);
+   			LoadDriverInformation(oDriver);
     	} else if(QSParent == "Tracks") {
     		// load track information
     	}
@@ -157,122 +143,128 @@ void cDatabaseWindow::DeleteDatabaseItem()
 
 }
 
-void cDatabaseWindow::LoadDriverInformation(cDatabaseDriver* i_opDriver)
+void cDatabaseWindow::LoadDriverInformation(const cDatabaseDriver& i_oDriver)
 {
-    m_opMainWindow->lineEdit_DriverName->setText(i_opDriver->GetName().c_str());
-    m_opMainWindow->label_DriverDrivingChampionships->setText(QString("%1").arg(i_opDriver->GetDrivingChampionships()));
-    m_opMainWindow->label_DriverDrivingRaces->setText(QString("%1").arg(i_opDriver->GetDrivingRaces()));
-    m_opMainWindow->label_DriverPoints->setText(QString("%1").arg(i_opDriver->GetPoints()));
-    m_opMainWindow->label_DriverWonRaces->setText(QString("%1").arg(i_opDriver->GetWinRaces()));
-    m_opMainWindow->label_DriverWonChampionships->setText(QString("%1").arg(i_opDriver->GetWinChampionships()));
+    m_opMainWindow->lineEdit_DriverName->setText(i_oDriver.GetName().c_str());
+    m_opMainWindow->label_DriverDrivingChampionships->setText(QString("%1").arg(i_oDriver.GetDrivingChampionships()));
+    m_opMainWindow->label_DriverDrivingRaces->setText(QString("%1").arg(i_oDriver.GetDrivingRaces()));
+    m_opMainWindow->label_DriverPoints->setText(QString("%1").arg(i_oDriver.GetPoints()));
+    m_opMainWindow->label_DriverWonRaces->setText(QString("%1").arg(i_oDriver.GetWinRaces()));
+    m_opMainWindow->label_DriverWonChampionships->setText(QString("%1").arg(i_oDriver.GetWinChampionships()));
 }
 
-void cDatabaseWindow::SaveDriverInformation(cDatabaseDriver* i_opDriver)
+void cDatabaseWindow::SaveDriverInformation(cDatabaseDriver& o_oDriver)
 {
-    i_opDriver->SetName(m_opMainWindow->lineEdit_DriverName->text().toStdString());
+    o_oDriver.SetName(m_opMainWindow->lineEdit_DriverName->text().toStdString());
+	o_oDriver.SetDrivingChampionships(m_opMainWindow->label_DriverDrivingChampionships->text().toInt());
+	o_oDriver.SetDrivingRaces(m_opMainWindow->label_DriverDrivingRaces->text().toInt());
+	o_oDriver.SetPoints(m_opMainWindow->label_DriverPoints->text().toInt());
+	o_oDriver.SetWinRaces(m_opMainWindow->label_DriverWonRaces->text().toUInt());
+	o_oDriver.SetWinChampionships(m_opMainWindow->label_DriverWonChampionships->text().toUInt());
 }
 
-void cDatabaseWindow::LoadCarInformation(cDatabaseCar* i_opCar)
+void cDatabaseWindow::LoadCarInformation(const cDatabaseCar& i_oCar)
 {
-    m_opMainWindow->lineEdit_CarName->setText(i_opCar->GetName().c_str());
-    m_opMainWindow->doubleSpinBox_CarTankCapacity->setValue(i_opCar->GetTankCapacity());
-    m_opMainWindow->spinBox_Speed_0->setValue(i_opCar->GetSpeed(0));
-    m_opMainWindow->spinBox_Speed_1->setValue(i_opCar->GetSpeed(1));
-    m_opMainWindow->spinBox_Speed_2->setValue(i_opCar->GetSpeed(2));
-    m_opMainWindow->spinBox_Speed_3->setValue(i_opCar->GetSpeed(3));
-    m_opMainWindow->spinBox_Speed_4->setValue(i_opCar->GetSpeed(4));
-    m_opMainWindow->spinBox_Speed_5->setValue(i_opCar->GetSpeed(5));
-    m_opMainWindow->spinBox_Speed_6->setValue(i_opCar->GetSpeed(6));
-    m_opMainWindow->spinBox_Speed_7->setValue(i_opCar->GetSpeed(7));
-    m_opMainWindow->spinBox_Speed_8->setValue(i_opCar->GetSpeed(8));
-    m_opMainWindow->spinBox_Speed_9->setValue(i_opCar->GetSpeed(9));
-    m_opMainWindow->spinBox_Speed_10->setValue(i_opCar->GetSpeed(10));
-    m_opMainWindow->spinBox_Speed_11->setValue(i_opCar->GetSpeed(11));
-    m_opMainWindow->spinBox_Speed_12->setValue(i_opCar->GetSpeed(12));
-    m_opMainWindow->spinBox_Speed_13->setValue(i_opCar->GetSpeed(13));
-    m_opMainWindow->spinBox_Speed_14->setValue(i_opCar->GetSpeed(14));
-    m_opMainWindow->spinBox_Speed_15->setValue(i_opCar->GetSpeed(15));
+    m_opMainWindow->lineEdit_CarName->setText(i_oCar.GetName().c_str());
+    m_opMainWindow->doubleSpinBox_CarTankCapacity->setValue(i_oCar.GetTankCapacity());
+    m_opMainWindow->spinBox_Speed_0->setValue(i_oCar.GetSpeed(0));
+    m_opMainWindow->spinBox_Speed_1->setValue(i_oCar.GetSpeed(1));
+    m_opMainWindow->spinBox_Speed_2->setValue(i_oCar.GetSpeed(2));
+    m_opMainWindow->spinBox_Speed_3->setValue(i_oCar.GetSpeed(3));
+    m_opMainWindow->spinBox_Speed_4->setValue(i_oCar.GetSpeed(4));
+    m_opMainWindow->spinBox_Speed_5->setValue(i_oCar.GetSpeed(5));
+    m_opMainWindow->spinBox_Speed_6->setValue(i_oCar.GetSpeed(6));
+    m_opMainWindow->spinBox_Speed_7->setValue(i_oCar.GetSpeed(7));
+    m_opMainWindow->spinBox_Speed_8->setValue(i_oCar.GetSpeed(8));
+    m_opMainWindow->spinBox_Speed_9->setValue(i_oCar.GetSpeed(9));
+    m_opMainWindow->spinBox_Speed_10->setValue(i_oCar.GetSpeed(10));
+    m_opMainWindow->spinBox_Speed_11->setValue(i_oCar.GetSpeed(11));
+    m_opMainWindow->spinBox_Speed_12->setValue(i_oCar.GetSpeed(12));
+    m_opMainWindow->spinBox_Speed_13->setValue(i_oCar.GetSpeed(13));
+    m_opMainWindow->spinBox_Speed_14->setValue(i_oCar.GetSpeed(14));
+    m_opMainWindow->spinBox_Speed_15->setValue(i_oCar.GetSpeed(15));
 
-    m_opMainWindow->doubleSpinBox_Consumption_1->setValue( i_opCar->GetConsumption(1));
-    m_opMainWindow->doubleSpinBox_Consumption_2->setValue( i_opCar->GetConsumption(2));
-    m_opMainWindow->doubleSpinBox_Consumption_3->setValue( i_opCar->GetConsumption(3));
-    m_opMainWindow->doubleSpinBox_Consumption_4->setValue( i_opCar->GetConsumption(4));
-    m_opMainWindow->doubleSpinBox_Consumption_5->setValue( i_opCar->GetConsumption(5));
-    m_opMainWindow->doubleSpinBox_Consumption_6->setValue( i_opCar->GetConsumption(6));
-    m_opMainWindow->doubleSpinBox_Consumption_7->setValue( i_opCar->GetConsumption(7));
-    m_opMainWindow->doubleSpinBox_Consumption_8->setValue( i_opCar->GetConsumption(8));
-    m_opMainWindow->doubleSpinBox_Consumption_9->setValue( i_opCar->GetConsumption(9));
-    m_opMainWindow->doubleSpinBox_Consumption_10->setValue(i_opCar->GetConsumption(10));
-    m_opMainWindow->doubleSpinBox_Consumption_11->setValue(i_opCar->GetConsumption(11));
-    m_opMainWindow->doubleSpinBox_Consumption_12->setValue(i_opCar->GetConsumption(12));
-    m_opMainWindow->doubleSpinBox_Consumption_13->setValue(i_opCar->GetConsumption(13));
-    m_opMainWindow->doubleSpinBox_Consumption_14->setValue(i_opCar->GetConsumption(14));
-    m_opMainWindow->doubleSpinBox_Consumption_15->setValue(i_opCar->GetConsumption(15));
+    m_opMainWindow->doubleSpinBox_Consumption_1->setValue( i_oCar.GetConsumption(1));
+    m_opMainWindow->doubleSpinBox_Consumption_2->setValue( i_oCar.GetConsumption(2));
+    m_opMainWindow->doubleSpinBox_Consumption_3->setValue( i_oCar.GetConsumption(3));
+    m_opMainWindow->doubleSpinBox_Consumption_4->setValue( i_oCar.GetConsumption(4));
+    m_opMainWindow->doubleSpinBox_Consumption_5->setValue( i_oCar.GetConsumption(5));
+    m_opMainWindow->doubleSpinBox_Consumption_6->setValue( i_oCar.GetConsumption(6));
+    m_opMainWindow->doubleSpinBox_Consumption_7->setValue( i_oCar.GetConsumption(7));
+    m_opMainWindow->doubleSpinBox_Consumption_8->setValue( i_oCar.GetConsumption(8));
+    m_opMainWindow->doubleSpinBox_Consumption_9->setValue( i_oCar.GetConsumption(9));
+    m_opMainWindow->doubleSpinBox_Consumption_10->setValue(i_oCar.GetConsumption(10));
+    m_opMainWindow->doubleSpinBox_Consumption_11->setValue(i_oCar.GetConsumption(11));
+    m_opMainWindow->doubleSpinBox_Consumption_12->setValue(i_oCar.GetConsumption(12));
+    m_opMainWindow->doubleSpinBox_Consumption_13->setValue(i_oCar.GetConsumption(13));
+    m_opMainWindow->doubleSpinBox_Consumption_14->setValue(i_oCar.GetConsumption(14));
+    m_opMainWindow->doubleSpinBox_Consumption_15->setValue(i_oCar.GetConsumption(15));
 }
 
 void cDatabaseWindow::SaveDatabaseItem()
 {
-
     QTreeWidgetItem* opCurrentItem = m_opMainWindow->treeWidget_Database->currentItem();
     if(opCurrentItem != NULL) {
-    	QString QSText = opCurrentItem->text(0);
+    	std::string QSText = opCurrentItem->text(0).toStdString();
     	QTreeWidgetItem* opTreeWidgetItemParent = opCurrentItem->parent();
     	if(opTreeWidgetItemParent != NULL) {
     		QString QSParent = opTreeWidgetItemParent->text(0);
     		if(QSParent == "Cars") {
     			// save car information
-    			cDatabaseCar* opCar = m_opDatabase->GetCar(QSText.toStdString());
-    			SaveCarInformation(opCar);
+				m_opDatabase->DeleteCar(QSText);
+				cDatabaseCar oCar("");
+    			SaveCarInformation(oCar);
+				m_opDatabase->UpdateCar(oCar);
     		} else if(QSParent == "Drivers") {
     			// load driver information
-    			cDatabaseDriver* opDriver = m_opDatabase->GetDriver(QSText.toStdString());
-    			SaveDriverInformation(opDriver);
+    			m_opDatabase->DeleteDriver(QSText);
+				cDatabaseDriver oDriver("");
+				SaveDriverInformation(oDriver);
+				m_opDatabase->UpdateDriver(oDriver);    			
     		} else if(QSParent == "Tracks") {
     			// load track information
     		}
     	}
     }
-
     InitDatabaseTree();
-
 }
 
-void cDatabaseWindow::SaveCarInformation(cDatabaseCar* i_opCar)
+void cDatabaseWindow::SaveCarInformation(cDatabaseCar& o_oCar)
 {
-    i_opCar->SetName(m_opMainWindow->lineEdit_CarName->text().toStdString());
-    i_opCar->SetTankCapacity(m_opMainWindow->doubleSpinBox_CarTankCapacity->value());
+    o_oCar.SetName(m_opMainWindow->lineEdit_CarName->text().toStdString());
+    o_oCar.SetTankCapacity(m_opMainWindow->doubleSpinBox_CarTankCapacity->value());
 
-    i_opCar->SetSpeed(0,  m_opMainWindow->spinBox_Speed_0->value());
-    i_opCar->SetSpeed(1,  m_opMainWindow->spinBox_Speed_1->value());
-    i_opCar->SetSpeed(2,  m_opMainWindow->spinBox_Speed_2->value());
-    i_opCar->SetSpeed(3,  m_opMainWindow->spinBox_Speed_3->value());
-    i_opCar->SetSpeed(4,  m_opMainWindow->spinBox_Speed_4->value());
-    i_opCar->SetSpeed(5,  m_opMainWindow->spinBox_Speed_5->value());
-    i_opCar->SetSpeed(6,  m_opMainWindow->spinBox_Speed_6->value());
-    i_opCar->SetSpeed(7,  m_opMainWindow->spinBox_Speed_7->value());
-    i_opCar->SetSpeed(8,  m_opMainWindow->spinBox_Speed_8->value());
-    i_opCar->SetSpeed(9,  m_opMainWindow->spinBox_Speed_9->value());
-    i_opCar->SetSpeed(10, m_opMainWindow->spinBox_Speed_10->value());
-    i_opCar->SetSpeed(11, m_opMainWindow->spinBox_Speed_11->value());
-    i_opCar->SetSpeed(12, m_opMainWindow->spinBox_Speed_12->value());
-    i_opCar->SetSpeed(13, m_opMainWindow->spinBox_Speed_13->value());
-    i_opCar->SetSpeed(14, m_opMainWindow->spinBox_Speed_14->value());
-    i_opCar->SetSpeed(15, m_opMainWindow->spinBox_Speed_15->value());
+    o_oCar.SetSpeed(0,  m_opMainWindow->spinBox_Speed_0->value());
+    o_oCar.SetSpeed(1,  m_opMainWindow->spinBox_Speed_1->value());
+    o_oCar.SetSpeed(2,  m_opMainWindow->spinBox_Speed_2->value());
+    o_oCar.SetSpeed(3,  m_opMainWindow->spinBox_Speed_3->value());
+    o_oCar.SetSpeed(4,  m_opMainWindow->spinBox_Speed_4->value());
+    o_oCar.SetSpeed(5,  m_opMainWindow->spinBox_Speed_5->value());
+    o_oCar.SetSpeed(6,  m_opMainWindow->spinBox_Speed_6->value());
+    o_oCar.SetSpeed(7,  m_opMainWindow->spinBox_Speed_7->value());
+    o_oCar.SetSpeed(8,  m_opMainWindow->spinBox_Speed_8->value());
+    o_oCar.SetSpeed(9,  m_opMainWindow->spinBox_Speed_9->value());
+    o_oCar.SetSpeed(10, m_opMainWindow->spinBox_Speed_10->value());
+    o_oCar.SetSpeed(11, m_opMainWindow->spinBox_Speed_11->value());
+    o_oCar.SetSpeed(12, m_opMainWindow->spinBox_Speed_12->value());
+    o_oCar.SetSpeed(13, m_opMainWindow->spinBox_Speed_13->value());
+    o_oCar.SetSpeed(14, m_opMainWindow->spinBox_Speed_14->value());
+    o_oCar.SetSpeed(15, m_opMainWindow->spinBox_Speed_15->value());
 
-    i_opCar->SetConsumption(1, m_opMainWindow->doubleSpinBox_Consumption_1->value());
-    i_opCar->SetConsumption(2, m_opMainWindow->doubleSpinBox_Consumption_2->value());
-    i_opCar->SetConsumption(3, m_opMainWindow->doubleSpinBox_Consumption_3->value());
-    i_opCar->SetConsumption(4, m_opMainWindow->doubleSpinBox_Consumption_4->value());
-    i_opCar->SetConsumption(5, m_opMainWindow->doubleSpinBox_Consumption_5->value());
-    i_opCar->SetConsumption(6, m_opMainWindow->doubleSpinBox_Consumption_6->value()); 
-    i_opCar->SetConsumption(7, m_opMainWindow->doubleSpinBox_Consumption_7->value());
-    i_opCar->SetConsumption(8, m_opMainWindow->doubleSpinBox_Consumption_8->value());
-    i_opCar->SetConsumption(9, m_opMainWindow->doubleSpinBox_Consumption_9->value());
-    i_opCar->SetConsumption(10, m_opMainWindow->doubleSpinBox_Consumption_10->value());
-    i_opCar->SetConsumption(11, m_opMainWindow->doubleSpinBox_Consumption_11->value());
-    i_opCar->SetConsumption(12, m_opMainWindow->doubleSpinBox_Consumption_12->value());
-    i_opCar->SetConsumption(13, m_opMainWindow->doubleSpinBox_Consumption_13->value());
-    i_opCar->SetConsumption(14, m_opMainWindow->doubleSpinBox_Consumption_14->value());
-    i_opCar->SetConsumption(15, m_opMainWindow->doubleSpinBox_Consumption_15->value());
+    o_oCar.SetConsumption(1, m_opMainWindow->doubleSpinBox_Consumption_1->value());
+    o_oCar.SetConsumption(2, m_opMainWindow->doubleSpinBox_Consumption_2->value());
+    o_oCar.SetConsumption(3, m_opMainWindow->doubleSpinBox_Consumption_3->value());
+    o_oCar.SetConsumption(4, m_opMainWindow->doubleSpinBox_Consumption_4->value());
+    o_oCar.SetConsumption(5, m_opMainWindow->doubleSpinBox_Consumption_5->value());
+    o_oCar.SetConsumption(6, m_opMainWindow->doubleSpinBox_Consumption_6->value()); 
+    o_oCar.SetConsumption(7, m_opMainWindow->doubleSpinBox_Consumption_7->value());
+    o_oCar.SetConsumption(8, m_opMainWindow->doubleSpinBox_Consumption_8->value());
+    o_oCar.SetConsumption(9, m_opMainWindow->doubleSpinBox_Consumption_9->value());
+    o_oCar.SetConsumption(10, m_opMainWindow->doubleSpinBox_Consumption_10->value());
+    o_oCar.SetConsumption(11, m_opMainWindow->doubleSpinBox_Consumption_11->value());
+    o_oCar.SetConsumption(12, m_opMainWindow->doubleSpinBox_Consumption_12->value());
+    o_oCar.SetConsumption(13, m_opMainWindow->doubleSpinBox_Consumption_13->value());
+    o_oCar.SetConsumption(14, m_opMainWindow->doubleSpinBox_Consumption_14->value());
+    o_oCar.SetConsumption(15, m_opMainWindow->doubleSpinBox_Consumption_15->value());
 }
 

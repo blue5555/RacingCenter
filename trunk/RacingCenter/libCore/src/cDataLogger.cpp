@@ -22,6 +22,7 @@ void cDataLogger::Clear()
 {
 	m_bLogging = false;
 	m_oDriverMessages.clear();
+	m_oRoundFinish.clear();
 }
 
 void cDataLogger::StartLogging()
@@ -34,11 +35,19 @@ void cDataLogger::StopLogging()
 	m_bLogging = false;
 }
 
-void cDataLogger::AddMessage(const sDriverMessage& i_oDriverMessage)
+void cDataLogger::AddRoundFinish(const sDriverMessage& i_oDriverMessage)
 {
 	if(m_bLogging)
 	{
-		m_oDriverMessages[i_oDriverMessage.m_iID].push_back(i_oDriverMessage);
+		m_oRoundFinish.push_back(i_oDriverMessage);
+	}
+}
+
+void cDataLogger::AddDriverMessage(const sDriverMessage& i_oDriverMessage)
+{
+	if(m_bLogging)
+	{
+		m_oDriverMessages.push_back(i_oDriverMessage);
 	}
 }
 

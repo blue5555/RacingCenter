@@ -27,7 +27,7 @@ cDriver::cDriver() :
 }
 
 cDriver::cDriver(cRace* i_opRace, const std::string& i_strDriverName, const tUInt& i_nID, const std::string& i_strCarName) :
- cDatabaseDriver(*cDatabase::instance()->GetDriver(i_strDriverName))
+ cDatabaseDriver(cDatabase::instance()->GetDriver(i_strDriverName))
 ,m_oCar(i_strCarName)
 ,m_opRace(i_opRace)
 ,m_iID(i_nID)
@@ -86,27 +86,23 @@ const sDriverMessage cDriver::CreateDisplayMessage(const tTimeStamp& i_oTimeStam
 
     memcpy(oDriverMessage.m_strName, m_strName.c_str(),32);
 	//oDriverMessage.m_strName = m_strName.c_str();
-	oDriverMessage.m_iID = m_iID;
+	oDriverMessage.m_iID		= m_iID;
+	oDriverMessage.m_bIsInBox	= m_oCar.GetIsInBox();
+	oDriverMessage.m_nPosition	= m_nPosition;
+	oDriverMessage.m_nRounds	= m_oRoundtimes.size();
 
-	oDriverMessage.m_bIsInBox = m_oCar.GetIsInBox();
-
-	oDriverMessage.m_nPosition = m_nPosition;
-	
-	oDriverMessage.m_nRounds = m_oRoundtimes.size();
+	oDriverMessage.m_nTimeStamp = i_oTimeStamp;
 
 	if(m_opRace)
 	{
 		oDriverMessage.m_nRaceRounds = m_opRace->Rounds();
-		oDriverMessage.m_nRaceMode = m_opRace->RaceMode();
+		oDriverMessage.m_nRaceMode	 = m_opRace->RaceMode();
 	}
 
-	oDriverMessage.m_oController = m_oController;
-
-	oDriverMessage.m_nProgSpeed = m_oCar.GetProgSpeed();
-
+	oDriverMessage.m_oController	 = m_oController;
+	oDriverMessage.m_nProgSpeed		 = m_oCar.GetProgSpeed();
 	oDriverMessage.m_bIsDisqualified = m_bDisqualified;
-
-	oDriverMessage.m_f32FuelLevel = m_oCar.GetFuelLevel();
+	oDriverMessage.m_f32FuelLevel    = m_oCar.GetFuelLevel();
 	oDriverMessage.m_f32FuelCapacity = m_oCar.GetTankCapacity();
 
 	oDriverMessage.m_bChoas = IsChaosDriver();
@@ -127,7 +123,6 @@ const sDriverMessage cDriver::CreateDisplayMessage(const tTimeStamp& i_oTimeStam
 	} else {
 		oDriverMessage.m_f32LastLapTime = 0;
 	}
-
 	return oDriverMessage;
 }
 

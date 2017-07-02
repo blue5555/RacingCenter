@@ -21,18 +21,17 @@ class cDatabaseWindow : public QObject
 
     tBool InitDatabaseTree();
 
-    void LoadDriverInformation(cDatabaseDriver* i_opDriver);
-    void SaveDriverInformation(cDatabaseDriver* i_opDriver);
+    void LoadDriverInformation(const cDatabaseDriver& i_oDriver);
+    void SaveDriverInformation(cDatabaseDriver& o_oDriver);
 
-    void LoadCarInformation(cDatabaseCar* i_opCar);
-    void SaveCarInformation(cDatabaseCar* i_opCar);
-
+    void LoadCarInformation(const cDatabaseCar& i_oCar);
+    void SaveCarInformation(cDatabaseCar& i_oCar);
 
 public:
-        cDatabaseWindow(const Ui::MainWindow* i_opMainWindow, cRacingWindow& i_oRacingWindow);
-        ~cDatabaseWindow();
+    cDatabaseWindow(const Ui::MainWindow* i_opMainWindow, cRacingWindow& i_oRacingWindow);
+    ~cDatabaseWindow();
 
-        tBool Init();
+    tBool Init();
 
 public slots:
     void DatabaseItemDoubleClicked(QTreeWidgetItem* opTreeWidgetItem, int column);

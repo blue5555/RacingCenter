@@ -8,6 +8,10 @@ class cDatabaseBaseElement
 
 protected:
 	std::string     	m_strName;
+	QStringList m_oDatabaseColumnsName;
+	QStringList m_oDatabaseColumnsType;
+
+	tBool AddColumn(std::string i_strColumnName, std::string i_strType);
 
 public:
 	cDatabaseBaseElement(const std::string& i_strName = "");
@@ -15,6 +19,10 @@ public:
 
     const std::string& GetName() const;
     tBool SetName(const std::string& i_strName);
+
+	const QStringList& GetColumnNames() const;
+	const QStringList& GetColumnType() const;
+
 
 };
 

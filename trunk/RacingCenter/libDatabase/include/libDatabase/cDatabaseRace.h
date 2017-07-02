@@ -23,11 +23,17 @@ class cDatabaseRace
 
 	map<tUInt, cDatabaseRaceDriver>	m_oDrivers;
 
+	tBool Init();
+
 public:
 	cDatabaseRace();
 	cDatabaseRace(const cRace* i_opRace);
 	~cDatabaseRace();
-		
+
+	tBool Set(const QStringList& i_oValues);
+	QStringList GetColumnValues() const;
+
+
 };
 
 

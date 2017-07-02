@@ -102,6 +102,8 @@ struct sDriverMessage
 	tInt8		m_bIsInBox;
 	tInt8		m_bIsDisqualified;
 
+	tTimeStamp	m_nTimeStamp;
+
 	tFloat32	m_f32FuelLevel;
 	tFloat32	m_f32FuelCapacity;
 	tFloat32	m_f32Time2Leader;

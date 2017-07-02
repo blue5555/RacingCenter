@@ -14,6 +14,7 @@ cDatabaseRace::cDatabaseRace() :
 ,m_nChaosCounter(0)
 ,m_bDriveFinish(false)
 {
+	Init();
 }
 
 cDatabaseRace::cDatabaseRace(const cRace* i_opRace) :
@@ -27,8 +28,25 @@ cDatabaseRace::cDatabaseRace(const cRace* i_opRace) :
 ,m_nChaosCounter(i_opRace->GetChaosCounter())
 ,m_bDriveFinish(i_opRace->GetDriveFinish())
 {
+	Init();
 }
 
 cDatabaseRace::~cDatabaseRace()
 {
+}
+
+tBool cDatabaseRace::Init()
+{
+	return true;
+}
+
+tBool cDatabaseRace::Set(const QStringList& i_oValues)
+{
+	return true;
+}
+
+QStringList cDatabaseRace::GetColumnValues() const
+{
+	QStringList oValues;
+	return oValues;
 }
